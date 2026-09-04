@@ -1,0 +1,87 @@
+﻿@model IEnumerable<SmartDailyPlanner.Models.PlannerTask>
+@{
+    ViewData["Title"] = "My Tasks";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1>My Tasks</h1>
+        <p class="text-muted">view and Manage your daily task</p>
+    </div>
+    <a asp-controller="Tasks" asp-action="Create" class="btn btn-primary">Add New Task</a>
+</div>
+
+@if(TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        No tasks have been created yet.
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class=" table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Title</th>
+                    <th>Due Date</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var task in Model)
+                {
+                    <tr>
+                        <td>@task.Title</td>
+                        <td>@task.DueDate.ToString("dd MMM yyyy")</td>
+                        <td>
+                            @if (task.Priority == "High")
+                            {
+                                <span class="badge bg-danger">
+                                    High
+                                </span>
+                            }
+                            else if (task.Priority == "Medium")
+                            {
+                                <span class="badge bg-warning text-dark">
+                                    Medium
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success">
+                                    Low
+                                </span>
+                            }
+                        </td>
+                        <td>
+                            @if (task.IsCompleted)
+                            {
+                                <span class="badge bg-success">
+                                    Completed
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">
+                                    Pending
+                                </span>
+                            }
+                        </td>
+                        <td>
+                            @task.CreatedAt.ToString("dd MMM yyyy hh:mm tt")
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

@@ -1,0 +1,111 @@
+﻿@model SmartDailyPlanner.Models.PlannerTask
+
+@{
+    ViewData["Title"] = "Create Task";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0">Create New Task</h2>
+            </div>
+
+            <div class="card-body">
+                <form asp-controller="Tasks"
+                      asp-action="Create"
+                      method="post">
+
+                    <div asp-validation-summary="ModelOnly"
+                         class="text-danger mb-3">
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Title"
+                               class="form-label">
+                        </label>
+
+                        <input asp-for="Title"
+                               class="form-control"
+                               placeholder="Enter task title" />
+
+                        <span asp-validation-for="Title"
+                              class="text-danger">
+                        </span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Description"
+                               class="form-label">
+                        </label>
+
+                        <textarea asp-for="Description"
+                                  class="form-control"
+                                  rows="4"
+                                  placeholder="Enter task description">
+                        </textarea>
+
+                        <span asp-validation-for="Description"
+                              class="text-danger">
+                        </span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="DueDate"
+                               class="form-label">
+                        </label>
+
+                        <input asp-for="DueDate"
+                               class="form-control" />
+
+                        <span asp-validation-for="DueDate"
+                              class="text-danger">
+                        </span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Priority"
+                               class="form-label">
+                        </label>
+
+                        <select asp-for="Priority"
+                                class="form-select">
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+
+                        <span asp-validation-for="Priority"
+                              class="text-danger">
+                        </span>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input asp-for="IsCompleted"
+                               class="form-check-input" />
+
+                        <label asp-for="IsCompleted"
+                               class="form-check-label">
+                            Mark as completed
+                        </label>
+                    </div>
+
+                    <button type="submit"
+                            class="btn btn-primary">
+                        Save Task
+                    </button>
+
+                    <a asp-controller="Tasks"
+                       asp-action="Index"
+                       class="btn btn-secondary">
+                        Cancel
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
