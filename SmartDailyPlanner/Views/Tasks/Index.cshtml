@@ -63,18 +63,43 @@ else
                             }
                         </td>
                         <td>
-                            @if (task.IsCompleted)
-                            {
-                                <span class="badge bg-success">
-                                    Completed
-                                </span>
-                            }
-                            else
-                            {
-                                <span class="badge bg-secondary">
-                                    Pending
-                                </span>
-                            }
+                            <form asp-controller="Tasks"
+                                  asp-action="UpdateStatus"
+                                  method="post">
+
+                                <input type="hidden"
+                                       name="id"
+                                       value="@task.Id" />
+
+                                <select name="isCompleted"
+                                        class="form-select form-select-sm
+                                    @(task.IsCompleted
+                                            ? "border-success text-success"
+                                            : "border-secondary text-secondary")"
+                                        onchange="this.form.submit()">
+
+                                    @if (task.IsCompleted)
+                                    {
+                                        <option value="false">
+                                            Pending
+                                        </option>
+
+                                        <option value="true" selected>
+                                            Completed
+                                        </option>
+                                    }
+                                    else
+                                    {
+                                        <option value="false" selected>
+                                            Pending
+                                        </option>
+
+                                        <option value="true">
+                                            Completed
+                                        </option>
+                                    }
+                                </select>
+                            </form>
                         </td>
                         <td>
                             @task.CreatedAt.ToString("dd MMM yyyy hh:mm tt")

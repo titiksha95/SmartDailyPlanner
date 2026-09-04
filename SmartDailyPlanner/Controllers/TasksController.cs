@@ -53,5 +53,28 @@ namespace SmartDailyPlanner.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateStatus(
+            int id,
+            bool isCompleted)
+        {
+            PlannerTask? plannerTask =
+                await _context.PlannerTasks.FindAsync(id);
+
+            if (plannerTask == null)
+            {
+                return NotFound();
+            }
+
+            plannerTask.IsCompleted = isCompleted;
+
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] =
+                "Task status updated successfully.";
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
