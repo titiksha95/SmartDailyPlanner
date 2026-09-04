@@ -81,7 +81,7 @@ Add a connection string to `appsettings.json`:
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=SmartDailyPlannerDB;Trusted_Connection=True;TrustServerCertificate=True;"
+    "DefaultConnection": "Server=YOUR-SERVER-NAME;Database=SmartDailyPlannerDB;Trusted_Connection=True;TrustServerCertificate=True;"
   }
 }
 ```
