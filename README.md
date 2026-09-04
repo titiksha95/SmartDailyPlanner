@@ -123,5 +123,5 @@ This project demonstrates:
 
 ## Author
 
-**Titiksha Jangid**
+**Titiksha**
 
